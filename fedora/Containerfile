@@ -2,6 +2,9 @@ FROM afni_fedora
 RUN dnf install -y gcc gcc-c++ make gsl-devel fftw-devel git
 RUN git clone https://github.com/nih-megcore/SAMsrcV5.git /opt/SAMsrcV5
 WORKDIR /opt/SAMsrcV5
+RUN echo "CFLAGS += -Wformat-overflow=0" >> /opt/SAMsrcV5/config/Makefile.opt
+RUN echo "CFLAGS += -Wno-implicit-function-declaration" >> /opt/SAMsrcV5/config/Makefile.opt
+RUN sed -i "4iinclude config/Makefile.opt" /opt/SAMsrcV5/Makefile
 RUN make
 ENV PATH=${PATH}:/opt/SAMsrcV5/bin
 #WORKDIR /opt/SAMsrcV5/bin
