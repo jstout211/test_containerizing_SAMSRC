@@ -1,6 +1,5 @@
-FROM afni2
+FROM afni_fedora
 RUN dnf install -y gcc gcc-c++ make gsl-devel fftw-devel git
-#RUN apt update && apt install -y build-essential libgsl-dev libfftw3-dev git
 RUN git clone https://github.com/nih-megcore/SAMsrcV5.git /opt/SAMsrcV5
 WORKDIR /opt/SAMsrcV5
 RUN make
